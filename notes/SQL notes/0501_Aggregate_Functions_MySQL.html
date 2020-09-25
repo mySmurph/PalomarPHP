@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Aggregate Functions</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Aggregate Functions
+</p>
+
+<pre class="lpre">
+
+Thus far, you have used SELECT statements that have
+shown detailed results.   The Result Set always includes
+the rows that pass any criteria test that is specified.
+
+What about summary information?
+
+You want to know the average price of a book for the
+Sunshine Publishing company or the total number of books
+sold.
+
+Fortunately, SQL provides some standard "aggregate"
+functions to allow you to see some summary information.
+
+<hr>
+
+SQL has six standard summary (i.e. aggregate) functions:
+
+  SUM(column_name)		- Totals the values in specified column
+  						  for all rows in the Result Set
+
+  AVG(column_name)		- Averages the values in specified column
+  						  for all rows in the Result Set
+
+  MIN(column_name)		- Returns the minimum value found in the
+                          			  column for all rows in the Result Set
+
+  MAX(column_name)		- Returns the maximum value found in the
+                          			  column for all rows in the Result Set
+
+  COUNT(column_name)		- Returns a count of all rows that have a
+  						  non-null value in the column-name
+
+  COUNT(*)				- Returns a count of all rows in
+  						  the Result Set
+
+<hr>
+In all aggregate functions where a column name is specified, NULL
+values are ignored.
+
+For example, an AVG function will correctly calculate the average
+for all rows in the Result Set by excluding any row from the Result Set
+and have a NULL value in the column.
+
+I am using the term, Result Set, loosely here.  When you use an
+aggregate function you never see the detailed Result Set displayed.
+Instead, the detailed Result Set is used by SQL, internally, to
+calculate the result of the aggregate function.
+
+The Results you see are just the summary information.
+
+<br>
+The aggregate functions I have showed you here are part of the SQL
+specification.
+
+
+<hr>
+
+WARNING:  You can NOT mix detailed row results and aggregate functions
+in a single SELECT statement!
+
+This will NOT work:
+
+	SELECT title, avg(price)
+	FROM book;
+
+Unfortunately, in MySQL, it will run... it justs brings back
+inaccurate results!
+
+
+<hr>
+Something to Remember...
+
+	When you use an aggregate function in the SELECT list
+	you will always get exactly ONE ROW returned.
+
+This will always be true when you are summarizing the information
+in the whole table.
+
+We will see in a later chapter, that are ways to summarize
+information on subsets of rows... stay tuned.
+
+
+
+</pre>
+
+
+</body>
+</html>
+
+
+</pre>
+
+
+</body>
+</html>

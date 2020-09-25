@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Using the HAVING clause</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Using the HAVING clause
+</p>
+
+<pre class="lpre">
+You have learned that the WHERE clause is used to restrict
+the number of rows that will appear in the Result Set.
+
+The HAVING clause is used to restrict the number of <b>groups</b>
+that will appear in the Result Set.
+
+
+<hr>
+Here I am getting the average price of a book based on what type
+of book it is...
+
+
+  SELECT type, AVG(price)
+  FROM book
+  GROUP BY type
+  ORDER BY 1, 2;
+
+
+Let's just look for where the average price is more
+than $25...
+
+  SELECT type, AVG(price)
+  FROM book
+  GROUP BY type
+  HAVING AVG(price) > 25
+  ORDER BY 1, 2;
+
+
+Notice that NULL group goes away as well.
+
+<hr>
+
+If you use a HAVING clause it must come directly after the
+GROUP BY clause.
+
+The GROUP BY clause gets applied first, then the groups are
+eliminated using the criteria specified in the HAVING clause.
+
+Notice that I used an aggregate in the HAVING clause...
+which is the most likely thing you will do with a HAVING clause.
+
+You may never use an aggregate in the WHERE clause!
+
+<hr>
+
+Let's looks at a mistake, so you can see the error message...
+
+  SELECT type, AVG(price)
+  FROM book
+  WHERE AVG(price) > 25
+  GROUP BY type
+  ORDER BY 1, 2;
+
+
+Oracle shows:  <span style="color: red;">ORA-00934: group function is not allowed here</span>
+
+MySQL shows:  <span style="color: red;">MySQL-1111: Invalid use of group function</span>
+
+<hr>
+
+Could you use a HAVING without using an aggregate function?
+
+Yes, but...  The GROUP BY clause will work like a WHERE clause.
+
+  SELECT type
+  FROM book
+  GROUP BY type
+  HAVING type = 'computer'
+  ORDER BY 1;
+
+... produces the same number of as ...
+
+  SELECT title, type
+  FROM book
+  WHERE type = 'computer'
+  ORDER BY 1;
+
+... but you can not list the title (or any other column)
+than the type column with the first statement.
+
+
+- END -
+
+
+</pre>
+
+
+</body>
+</html>

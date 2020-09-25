@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>What is a Foreign Key?</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+What is a Foreign Key?
+</p>
+
+<pre class="lpre">
+
+You know that a <b>Primary Key</b> is a column, or combination
+of columns, that is used to ensure the uniqueness of a
+row in a table.
+
+A <b>Foreign Key</b> is a column, or combination of columns,
+in one table that refers back to the <b>Primary Key</b>
+of another table.
+
+This relationship between a <b>Primary Key</b> and a <b>Foreign Key</b>
+is what is used to connect the data from two tables.
+
+
+<hr>
+
+How do you know which books (in the <b>book</b> table) that
+a particular publishing company (in the <b>publisher</b> table)
+have published?
+
+Look at the Database Diagram.
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_2.jpg" alt="Database Diagram - Part 2">
+
+
+
+
+See that there is a <b>pub_id</b> column that is the Primary
+Key of the publisher table.  There is also a <b>pub_id</b> column,
+in the book table that is a Foreign Key to the publisher table.
+
+<hr>
+
+There is a publisher, in the publisher table, that has
+a name of "All Techo Books" and it has a pub_id whose
+value is 1.
+
+Select all the data in the book table.  Now look at the
+pub_id column and you can see that there are six books
+that have a pub_id value of 1.   These are the books
+that are published by the "All Techo Books" publisher,
+since it has a pub_id of 1.
+
+The Foreign Key values in the book table get <b>joined</b>
+with matching Primary Key values in the publisher table.
+
+<hr>
+A relational database is designed in such a way to reduce
+the redundancy of data stored in the database.  This
+necessitates breaking up data into separate tables in
+such as way that may not be obvious.
+
+Most of time, questions asked of the database (i.e. queries)
+will need to be answered using data from more than one
+table.  This is done through a process known as <b>Joining</b>.
+
+Knowing how to <b>Join</b> the data between tables is
+absolutely necessary in order to be able to effectively
+use the data in most databases!
+
+
+- END -
+
+
+
+</pre>
+
+
+</body>
+</html>

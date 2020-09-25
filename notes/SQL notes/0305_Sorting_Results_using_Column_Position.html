@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Sorting Results using Column Position</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Sorting Results using Column Position
+</p>
+
+<pre class="lpre">
+You already know that you can sort the Result Set in order
+by column name using the <b>ORDER BY</b> clause.
+
+You can also use a number that represents the position
+where the column (or expression) is found in the SELECT
+list.
+
+
+Example...
+
+  SELECT title, price
+  FROM book
+  WHERE price > 20
+  ORDER BY 1;
+
+
+This shows the title and price information for all rows
+and the results are sorted in title order... because
+title is in the first position.
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_2.jpg" alt="Database Diagram - Part 2">
+
+
+
+
+<hr>
+
+You can use the DESC with the number position, just
+as you did with a column name.
+
+Example:
+
+  SELECT title, price
+  FROM book
+  WHERE price > 20
+  ORDER BY 1 DESC;
+
+<hr>
+
+You can still have one sort within another sort
+by specifying more than one column position.
+
+Example...
+
+  SELECT type, price
+  FROM book
+  ORDER BY 1, 2;
+
+
+
+<hr>
+
+WARNING:
+
+Most SQL statements are eventually incorporated into
+a programming language such as PHP, Visual Basic, or PL/SQL.
+
+Using column position numbers for sorting is fine for
+working interactively with SQL (as you are doing in this class),
+but should not be used if the SQL is intending to be used
+with a programming language.   Doing so makes the program
+harder to maintain and makes it more likely that errors
+will be introduced if the selection criteria change in
+the future.
+
+
+
+
+- END -
+
+
+</pre>
+
+
+</body>
+</html>

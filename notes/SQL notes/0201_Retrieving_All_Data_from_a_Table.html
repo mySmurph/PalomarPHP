@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Retrieving All Data from a Table</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Retrieving All Data from a Table
+</p>
+
+<pre class="lpre">
+The SELECT statement is the <b>only</b> statement used to query data
+on a relational database.
+
+The SELECT statement has many, many options.
+
+The most basic option is the ' * ' selector which
+will show you the data for all the columns and
+all the rows in a table.
+
+Example...
+
+  SELECT *
+  FROM book;
+
+
+This shows ALL the data <em>currently</em> stored in the <b>book</b> table.
+
+I say <em>currently</em> because, in the real world, data changes
+all the time.  If you worked for a large publishing company and
+you ran this statement three times in the same hour, you might
+get three different results.
+
+The correctness of a SQL query is determined by "Did it ask
+the right question?" not "Are data results always the same?"
+
+A relational database allows multiple users to make updates
+to the data from any location in the world where you can
+make a connection to the database.
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_1.jpg" alt="Database Diagram - Part 1">
+
+
+
+<hr>
+
+In this class, of course, no one will be updating the data
+but you.  That said, you should <b>always</b> code your statements
+assuming that the data could change at any moment!
+
+Don't ever code a SELECT statement that could only work
+correctly if the data never changed.
+
+<hr>
+
+Let's look at another example...
+
+  SELECT *
+  FROM publisher;
+
+
+Here you see all the data from the <b>publisher</b> table.
+There are less results, than with the <b>book</b> table
+because there are less rows and less columns in the
+<b>publisher</b> table.
+
+</pre>
+
+
+</body>
+</html>

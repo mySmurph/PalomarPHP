@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>HAVING with Compound Conditions</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+HAVING with Compound Conditions
+</p>
+
+<pre class="lpre">
+You can use compound conditions with the  HAVING clause
+just as you did with the WHERE clause.
+
+EXAMPLE...
+
+	SELECT type, AVG(price), SUM(ytd_sales)
+	FROM book
+	GROUP BY type
+	HAVING AVG(price) > 25
+		AND SUM(ytd_sales) > 20000
+	ORDER BY 1, 2;
+
+<hr>
+
+This works even when you use a multiple column group...
+
+
+	SELECT type, price, AVG(price), SUM(ytd_sales)
+	FROM book
+	GROUP BY type, price
+	HAVING AVG(price) > 10
+		AND SUM(ytd_sales) > 5000
+	ORDER BY 1, 2;
+
+
+
+
+- END -
+
+
+</pre>
+
+
+</body>
+</html>

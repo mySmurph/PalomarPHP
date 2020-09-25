@@ -1,0 +1,16 @@
+body{
+	background:		#F0E68C;
+	font-family:	helvetica, san-serif;
+	font-size:		1em;
+	color:			black;
+	margin: 0;
+}
+
+main{
+	padding: 1em;
+}
+.info{
+	background-color: #e6e6fa;
+	padding:	2em;
+	width:	20em;
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Join Multiple Tables with the USING clause</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Join Multiple Tables with the USING clause
+</p>
+
+<pre class="lpre">
+
+Thus far you have seen how to join two tables together in a SELECT
+statement.
+
+To get the information together between the <b>author</b> and <b>book</b> tables
+we will have to connect to the <b>bookauthor</b> table as well.
+
+This means we need to join three tables together.
+
+The way that is done is to order the tables properly in the FROM clause
+and continue specifying the join criteria for all tables.
+
+<hr>
+
+Example:
+
+	SELECT title, lastname, firstname
+	FROM book
+		JOIN bookauthor USING (ISBN)
+		JOIN author USING(author_id)
+	ORDER BY 1, 2, 3;
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_3.jpg" alt="Database Diagram - Part 3">
+
+
+
+<hr>
+
+Adding author_order and royaltyshare...
+
+	SELECT title, lastname, firstname, author_order, royaltyshare
+	FROM book
+		JOIN bookauthor USING (ISBN)
+		JOIN author USING(author_id)
+	ORDER BY 1, 2, 3;
+
+
+
+<hr>
+
+Getting the data sorted by author_order within title...
+
+	SELECT title, author_order ,lastname, firstname, royaltyshare
+	FROM book
+		JOIN bookauthor USING (ISBN)
+		JOIN author USING(author_id)
+	ORDER BY 1, 2;
+
+
+
+<hr>
+
+Now seeing the authors first and the books they have written...
+
+	SELECT lastname, firstname, title, author_order, royaltyshare
+	FROM book
+		JOIN bookauthor USING (ISBN)
+		JOIN author USING(author_id)
+	ORDER BY 1, 2, 3;
+
+
+Notice that I did not have to change the table order in the FROM clause.
+
+
+
+<hr>
+
+You can join as many tables as are needed.  Suppose I want to see
+which authors have written books for All Techo Books.  I now need to join
+four tables and use a WHERE clause...
+
+	SELECT name,  title, lastname, firstname
+	FROM publisher
+		JOIN book USING(pub_id)
+		JOIN bookauthor USING (ISBN)
+		JOIN author USING(author_id)
+	WHERE name = 'All Techo Books'
+	ORDER BY 1, 2, 3, 4;
+
+
+A good database diagram can help with this!
+
+
+
+</pre>
+
+
+</body>
+</html>
+
+
+</pre>
+
+
+</body>
+</html>
+
+

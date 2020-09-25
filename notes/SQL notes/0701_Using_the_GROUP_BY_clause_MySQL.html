@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Using the GROUP BY clause</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Using the GROUP BY clause
+</p>
+
+<pre class="lpre">
+So far, all of the summary information you've seen has
+come from using aggregate functions that were processed
+using all the rows in a table (or Result Set)
+
+Suppose you wanted to see how many books were sold for all
+the books in the database?   You would do...
+
+  SELECT SUM(ytd_sales)
+  FROM book;
+
+
+Now suppose you wanted to see how many books were sold for all
+the books in the database but shown by each publisher?
+
+<hr>
+
+The GROUP BY clause allows you to break up SQL results into
+sets of data.   You can get summary information on each set.
+
+Example:
+
+  SELECT name, SUM(ytd_sales)
+  FROM book JOIN publisher USING (pub_id)
+  GROUP BY name
+  ORDER BY 1;
+
+
+Behind the scenes, SQL makes a separate set of data for each
+publisher's name and applies the SUM(ytd_sales) to each
+separate set.
+
+NOTE:  Now that I can have more than one row returned, I sorted
+the results.
+
+<hr>
+
+I know what you're saying, you're saying "But Steve, I thought
+you couldn't mix detail information (e.g. name) with summary
+information (e.g. SUM(ytd_sales) ).
+
+Well that's still true, if you are summarizing information for the
+whole table.  When you use GROUP BY, the column (or columns) you
+use to define the subsets may be listed.  In fact, if you leave
+them off the SELECT list, how would you know what data went with
+what publisher?   The GROUP BY list of columns needs to be
+in the SELECT list columns for clarity.
+
+<hr>
+Here I am getting the average price of a book based on what type
+of book it is...
+
+
+  SELECT type, AVG(price)
+  FROM book
+  GROUP BY type
+  ORDER BY 1, 2;
+
+
+Let's get rid of the NULL group...
+
+  SELECT type, AVG(price)
+  FROM book
+  WHERE price IS NOT NULL
+  GROUP BY type
+  ORDER BY 1, 2;
+
+<hr>
+
+If you use a WHERE clause it must come before the
+GROUP BY.
+
+The WHERE clause gets applied first, then the remaining
+rows are GROUPed.
+
+
+<hr>
+
+Let's look at a mistake...
+
+  SELECT type, price, AVG(price)
+  FROM book
+  WHERE price IS NOT NULL
+  GROUP BY type
+  ORDER BY 1, 2;
+
+
+Even though this statement runs, it is a mistake!
+
+Unfortunately, MySQL does not show an error but, instead, gives
+inaccurate results for the price column.
+
+Look at the price column result for the 'Business' type books.
+It says that they are $29.99.   Well, they're not.  
+
+Run this query...
+
+  SELECT type, price
+  FROM book
+  WHERE type = 'business'
+  ORDER BY 1, 2;
+  
+... and you will see that there are different prices shown
+for different books.
+
+MySQL should display an error message instead of running this
+statement.  When using a GROUP BY, you must be very careful to 
+not list non-aggregated column names in the SELECT list
+unless they also appear in the GROUP BY list!
+
+In other words, if you use a GROUP BY, do NOT list any column in the SELECT list
+unless it is in the GROUP BY list or inside an aggregate function!
+
+<hr>
+
+Could you use a GROUP BY without using an aggregate function?
+
+Yes.  The GROUP BY clause works like a DISTINCT.
+
+Examples...
+
+  SELECT type
+  FROM book
+  GROUP BY type
+  ORDER BY 1;
+
+... produces the same results as ...
+
+  SELECT DISTINCT type
+  FROM book
+  ORDER BY 1;
+
+
+
+
+- END -
+
+
+</pre>
+
+
+</body>
+</html>

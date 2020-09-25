@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Eliminating Duplicate Rows from the Results</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Eliminating Duplicate Rows from the Results
+</p>
+
+<pre class="lpre">
+When joining two or more tables together, you can see duplicate
+information repeated in the Result Set.
+
+For example, if I wanted to know all the different states that
+authors lived in I could do this...
+
+	SELECT state, lastname, firstname
+	FROM author
+	ORDER BY 1, 2 ,3;
+
+Since it is a small amount of data, I could just count them up.   If
+you were dealing with a table that had thousands of authors, however,
+that wouldn't be a good way to do it.
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_3.jpg" alt="Database Diagram - Part 3">
+
+
+<hr>
+
+Since I really just wanted to see states,  I could change the
+statement to...
+
+	SELECT state
+	FROM author
+	ORDER BY 1;
+
+Again, not very practical.
+
+
+
+<hr>
+
+Fortunately, SQL provides a way to eliminate duplicate rows from the
+Result Set by using the keyword DISTINCT just after the word SELECT...
+
+	SELECT DISTINCT state
+	FROM author
+	ORDER BY 1;
+
+
+
+<hr>
+
+
+ You can even COUNT them instead...
+
+ 	SELECT COUNT(DISTINCT state)
+ 	FROM author
+	ORDER BY 1;
+
+ Remember, unless the DISTINCT is inside of an aggregate function it
+ will apply to all the columns in the Result Set.  You can not restrict to
+ a subset of columns.
+
+
+<hr>
+
+These two statements give you very different results...
+
+	SELECT DISTINCT price
+	FROM book
+	ORDER BY 1;
+
+	SELECT DISTINCT price, advance
+	FROM book
+	ORDER  BY 1, 2;
+
+... the 2nd statement does not show you the distinct prices
+It shows you the distinct price-advance combinations
+
+
+
+</pre>
+
+
+</body>
+</html>
+
+
+</pre>
+
+
+</body>
+</html>
+
+

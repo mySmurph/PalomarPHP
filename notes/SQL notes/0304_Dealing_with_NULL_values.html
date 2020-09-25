@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Dealing with NULL values</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Dealing with NULL values
+</p>
+
+<pre class="lpre">
+
+NULLs are a unique concept.
+
+It terms of data in a table, a column value is NULL
+if it has no value whatsoever.
+
+For example you might have an EMPLOYEE table and need
+to add information for a new employee.  This employee
+just moved to the area and is temporarily living in
+a hotel.  For now, the employee has no address.
+
+You still want to add the employee to your database so
+you add all the information you do have and add no
+data for the employee's address.
+
+<hr>
+
+NULLs are different from "blanks" or spaces.  They
+are no value at all.   The database assigns the NULL
+value to every data column that has not had any
+information entered in it.
+
+SQL allows you to search for columns that may have
+a NULL value.
+
+Why would that ever be useful?
+
+<hr>
+
+In the above example, about the employee with no
+address, we may need to mail the employee a W-2 form
+for tax withholding purposes.  You could query
+the table for anyone who does not yet have an
+address in the system and go talk to those employees
+to see if they have gotten a mailing address.
+
+Conceptual Example:
+
+	SELECT lastname, firstname, phone
+	FROM employee
+	WHERE address IS NULL
+	ORDER BY lastname, firstname;
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_2.jpg" alt="Database Diagram - Part 2">
+
+
+
+<hr>
+NULL means missing, unknown, or not applicable.
+
+It does not mean blank or zero.
+
+Look at the data in the <b>book</b> table.  There is
+one book, "Treats and More Treats" that has an advance
+of zero.   The publishing company intended to give this
+author no money for an advance.  A zero is not a
+default value, it is a specific value.  It is not a NULL.
+
+Another book, "The Psychology of Social Networking",
+has an advance column whose value is NULL.  This could
+mean that the company is going to publish the book
+but they have not negotiated a final price for the
+book.   They will update this column with a number
+when they have finished the negotiations.
+
+
+<hr>
+To find the books that have a NULL in the
+advance column you use a statement like this...
+
+  SELECT title
+  FROM book
+  WHERE advance IS NULL;
+
+To find the books that DO NOT have a NULL in the
+advance column you use a statement like this...
+
+  SELECT title
+  FROM book
+  WHERE advance IS NOT NULL;
+
+
+
+<hr>
+If you specify criteria about a column that may
+have a NULL in it, the rows with the NULL are
+automatically not returned to the Result Set.
+
+For example, the title table has 17 rows of data.
+One of those rows has a NULL in the advance column.
+
+If you run this statement...
+
+    SELECT title, advance
+    FROM book
+    WHERE advance >= 0;
+
+
+
+<hr>
+
+... you only get 16 rows returned.  When SQL
+compared advance to see if was greater than or
+equal to zero, NULL values do not pass that
+test... thus one row was rejected.
+
+Since a NULL value is "no value" it is never equal to
+anything... not even another NULL.   A NULL can only
+be directly "found" by SQL using the IS NULL operation.
+
+<hr>
+
+NEVER do this...
+
+    SELECT title, advance
+    FROM book
+    WHERE advance = NULL;
+
+or this...
+
+    SELECT title, advance
+    FROM book
+    WHERE advance = 'NULL';
+
+A NULL is never equal to any other value.  Use
+the IS NULL or IS NOT NULL instead.
+
+
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Many-to-Many Relationships</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Many-to-Many Relationships
+</p>
+
+<pre class="lpre">
+
+This relationship between a <b>Primary Key</b> and a
+<b>Foreign Key</b> is what is used to connect the data from
+two tables.  The relationship it enforces is called
+a <b>One-to-Many</b> relationship.
+
+As you have seen, there are three publishers listed in
+the <b>publisher</b> table.  For each publisher there are a
+number of books in the <b>book table</b> connected to it
+via the values of the pub_id column that resides in both
+tables.
+
+<hr>
+
+
+Conceptually, this is a One-to-Many relationship because
+"one" publisher can publish more than one ("many") books.
+
+It is NOT true (in our database) that a "one" book can
+be published by more than one ("many") publishers.
+
+What kind of relationships would be classified as Many-to-Many?
+
+
+<hr>
+
+Let's look at the relationship between author and book.
+
+Can an author write more than one book?
+
+Can a book be written by more than one author?
+
+The answer to both questions is yes.
+
+The real question is:  How do we enforce this relationship
+in the database?
+
+<hr>
+
+You might think that you could just carry an author_id
+column in the book table and an ISBN number in the author
+table... but that introduces big problems from a relational
+database standpoint.
+
+Using the above technique, here is an abbreviated data example
+of an author who has written three books.
+
+AuthorID 		ISBN		 SSN       	  	 Lastname  	FirstName
+173    		1-1032-1032-x	 111-22-3333	  Smith		John
+173    		1-1035-1035-x	 111-22-3333	  Smith		John
+173    		1-2106-2106-x	 111-22-3333	  Smith		John
+
+<hr>
+
+In this "new" author table, I have to repeat the author's
+AuthorID, SSN, Lastname, Firstname, etc. for every book
+they have written.   That is a lot of data redundancy!
+
+The goal is to repeat as little data as possible.
+
+I will break this up into two separate tables, an <b>author</b>
+table and a <b>bookauthor</b> table.
+
+<hr>
+AUTHOR
+----------------
+AuthorID-PK 	SSN       			Lastname  	  	FirstName
+173    		111-22-3333	  	Smith			John
+
+BOOKAUTHOR
+---------------------
+AuthorID-PK 		ISBN-PK
+173    			1-1032-1032-x
+173    			1-1035-1035-x
+173    			1-2106-2106-x
+
+This now allows me to put the author information
+(ssn, lastname, etc.) in just one table.  If I need to
+see how many books the author has written I can join the two
+tables on the author_id column and count the rows.
+
+<hr>
+AUTHOR
+----------------
+AuthorID-PK 	SSN       			Lastname  	  	FirstName
+173    		111-22-3333	  	Smith			John
+190    		222-33-4444	  	Jones			Mary
+
+BOOKAUTHOR
+---------------------
+AuthorID-PK-FK 		ISBN-PK-FK
+173    				1-1032-1032-x
+173    				1-1035-1035-x
+190    				1-2106-2106-x
+
+BOOK
+------
+ISBN-PK			Title					Price
+1-1032-1032-x		One Hour Negotiations	29.99
+1-1035-1035-x		Usability Testing		42.95
+1-2106-2106-x		Instilling Courage		17.00
+<hr>
+
+So, to take the conceptual many-to-many relationship
+between authors and books you have to invent a brand
+new table.   This is called an "Intersection" table.
+
+For this to work, the Primary Key of the Intersection table
+must be a combination of the Primary Keys from the
+tables you are connecting.
+
+The <b>author</b> table has a Primary Key of author_id
+and the <b>book</b> table has a Primary Key of ISBN.  So
+the Primary Key of the Intersection table <b>must</b> be the
+combination of the Author_id and the ISBN.
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_3.jpg" alt="Database Diagram - Part 3">
+
+
+
+<hr>
+
+But wait there's more!
+
+Now that we are implementing the relationship between the
+<b>book</b> table and <b>author</b> table with a <b>bookauthor</b> table
+you can discover new attributes that only make sense to be
+on the <b>bookauthor</b> table.
+
+For example, if I wrote a book with Bill Gates whose name do you
+think would be listed first?   Bill Gates would be in position #1
+and I would be position #2.
+
+Would I always be in position #2?   Not if I write a book by
+myself.  Then, clearly, I am in position #1.
+
+<hr>
+The "author position" information may be different for an author
+for each book they write, so it is an attribute of the author-book
+relationship and must appear on the <b>bookauthor</b> table.
+
+Likewise, I write a book with Bill Gates the monetary split is
+probably not going to be 50-50.  Bill Gates gets 95% and I get 5%.
+So, "royalty share" may be different for an author
+for each book they write, so it is an attribute of the author-book
+relationship and must appear on the <b>bookauthor</b> table.
+
+Look at the database diagram.
+
+<img src="DB_diagram_part_3.jpg" alt="Database diagram">
+
+
+
+
+- END -
+
+
+
+</pre>
+
+
+</body>
+</html>

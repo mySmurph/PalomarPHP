@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Join Multiple Tables with the ON clause</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Join Multiple Tables with the ON clause
+</p>
+
+<pre class="lpre">
+
+I almost always use the USING clause since I am looking for equality
+on columns that have the same name.  We need to use the ON clause
+when the column names are different... or if you need to JOIN on a
+compound condition...
+
+	SELECT ssn, a.city, a.state
+	FROM author a
+	  JOIN publisher p
+			ON (a.city = p.city AND a.state = p.state )
+	ORDER BY 1, 2, 3;
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_3.jpg" alt="Database Diagram - Part 3">
+
+
+
+<hr>
+
+Another Example:  Say your company had just acquired another
+publishing company and now had two "author" tables... author1
+and author2.   You need to look for duplicate names.
+
+Conceptual Example...
+
+	SELECT lastname, firstname
+	FROM author1 a1 JOIN author2 a2
+	  ON (a1.lastname = a2.lastname AND a1.firstname = a2.firstname)
+	ORDER BY 1, 2;
+
+
+<hr>
+I'm going to use a slightly altered database to illustrate the use
+of the ON clause in joining multiple tables
+
+Imagine, if you will, that we have a zpublisher table instead
+of a publisher table.  It has the same columns as the publisher table
+except that the Primary Key is publisher_id instead of pub_id.
+
+Also, imagine that we have zauthor table instead of an
+author table.  It has the same columns as the author table
+except that the Primary Key is the SSN instead of author_id.
+
+The bookauthor table is now the zbookauthor table. It has the same
+columns as the bookauthor table but the author_id holds a
+SSN instead of a numeric id.
+
+The book table is the same.
+
+<hr>
+<img src="DB_diagram_part_3_zzz.jpg">
+
+<hr>
+
+Example:
+
+	SELECT title, lastname, firstname
+	FROM book
+		JOIN zbookauthor USING (ISBN)
+		JOIN zauthor ON (author_id = SSN)
+	ORDER BY 1, 2, 3;
+
+
+<hr>
+Example:
+
+	SELECT name,  title, lastname, firstname
+	FROM zpublisher
+		JOIN zbook ON (publisher_id = pub_id)
+		JOIN zbookauthor USING (ISBN)
+		JOIN zauthor ON (author_id = SSN)
+	WHERE name = 'All Techo Books'
+	ORDER BY 1, 2, 3, 4;
+
+<h4 style='color: maroon;'>NOTE: You will only use the Z-prefixed tables in Exercise 6-4.   After that DO NOT use them again!</h4>
+
+
+</pre>
+
+
+</body>
+</html>
+
+
+</pre>
+
+
+</body>
+</html>
+
+

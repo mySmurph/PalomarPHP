@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Using Mathematical and Text Expressions</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Using Mathematical and Text Expressions
+</p>
+
+<pre class="lpre">
+You can specify more than just columns in a
+SELECT list.
+
+You can involve the columns in mathematical
+expressions and you can add extra text information
+to what appears in the Result Set.
+
+
+
+Example...
+
+  SELECT title, price, price * 1.05
+  FROM book;
+
+
+This shows the title and price information for all rows.
+
+It also shows what the price of the books would be
+if you raised their price by 5%.
+
+Notice that I can use the <b>price</b> column in more that
+one place in the SELECT list.
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_1.jpg" alt="Database Diagram - Part 1">
+
+
+
+<hr>
+You can use the standard mathematical operators:
+
+	+  	Addition
+	-	Subtraction
+	*	Multiplication
+	/	Division
+
+There are more operators, but these will do for now.
+
+Note: You can use ( )'s the same way you do in math.
+e.g.  (7 + 5) * 8
+
+
+<hr>
+
+Let's look at another example...
+
+  SELECT title, price * ytd_sales
+  FROM book;
+
+
+Here you see all the book titles and the total
+amount of revenue that each book has made year-to-date.
+(e.g.  revenue = price * ytd_sales)
+
+
+<hr>
+You can make it more obvious in the Result Set
+headings that Revenue is being shown.
+
+If you specify some double-quoted text after a column
+name (but within the same comma-set) it will
+appear as the heading in the Result set.
+
+
+Example...
+
+  SELECT title, price * ytd_sales "Revenue"
+  FROM book;
+
+<hr>
+
+Let's look at another example using Text...
+
+  SELECT 'Publisher: ', name, ' is based in ', city, state
+  FROM publisher;
+
+
+
+
+
+
+
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+body{
+	background:		#F0E68C;
+	font-family:	helvetica, san-serif;
+	font-size:		1em;
+	color:			black;
+	margin: 	0;
+	display:	block;
+}
+
+main{
+	padding: 1em;
+
+
+}
+#serverinfo{
+	display:	block;
+	position: 	fixed;
+	width:		100%;
+	bottom:		0;
+	background:		#F0E68C;
+}
+
+.info{
+	display:	block;
+	background: #e6e6fa;
+	padding:	2em;
+	width: 40em;
+}
+
+#featuredtitle{
+		position: absolute;
+		top: 85px;
+		left: 0px;
+		width: 350px;
+		height: 300px;
+		padding: 10px;
+		background-color: #ADD8E6;
+}
+	
+#stafflist{
+		position: absolute;
+		top: 85px;
+		left: 350px;
+		width: 430px;
+		height: 300px;
+		padding: 10px;
+		background-color: #E6E6FA;
+}
+
+#logon{
+		position: absolute;
+		top: 385px;
+		left: 350px;
+		width: 430px;
+		height: 200px;
+		padding: 10px;
+		background-color: #ADD8E6;
+}
+
+#findtitle{
+		position: absolute;
+		top: 385px;
+		left: 0px;
+		width: 350px;
+		height: 200px;
+		padding: 10px;
+		background-color: #E6E6FA;
+}

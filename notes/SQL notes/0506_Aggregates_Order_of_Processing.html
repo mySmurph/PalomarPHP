@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Aggregates Order of Processing</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Aggregates Order of Processing
+</p>
+
+<pre class="lpre">
+To help you visualize and understand how these statements
+are processed, I am going to talk you through an example...
+
+
+  SELECT AVG(price), SUM(ytd_sales)
+  FROM book JOIN publisher USING(pub_id)
+  WHERE name = 'All Techo Books';
+
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_2.jpg" alt="Database Diagram - Part 2">
+
+
+
+
+</pre>
+
+
+</body>
+</html>
+
+
+</pre>
+
+
+</body>
+</html>

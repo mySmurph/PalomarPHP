@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/1.css">
+</head>
+
+<body>
+
+<header>
+<img src="images/KingLibLogo.jpg">
+</header>
+
+<main>
+	<form method="post" action="assignment_1_add_patron.php">
+		<p>Please sign up</p>
+		<p>First Name:<br>
+		<input type="text" name="firstName" size="30"></p>
+		
+		<p>Last Name:<br>
+		<input type="text" name="lastName" size="30"></p>
+		
+		<p>Email:<br>
+		<input type="text" name="email" size="40"></p>
+		
+		<p>City of Residence<br>
+			<select name="city" size="1">
+				<option value="none">-</option>
+				<option value="Chicago">Chicago</option>
+				<option value="Detroit">Detroit</option>
+				<option value="Toronto">Toronto</option>
+			</select>
+		</p>
+		
+		<input type="submit" value="Submit Information">
+	</form>
+</main>
+</body>
+</html>

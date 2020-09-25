@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Logical Operators</title>
+	<style>
+
+	body {
+	  	font-family: Arial, Helvetica, sans-serif;
+  	}
+
+  	h2 {
+		color: maroon;
+  	}
+
+	.lesson {
+		color: maroon;
+		font-weight: bold;
+	}
+
+	.lpre {
+		padding-left: 10px;
+		color: #000033;
+		font-family: Ariel, Helvetica, san-serif;
+		font-size: 14pt;
+		font-weight: normal;
+	}
+
+	</style>
+</head>
+
+<body>
+<p class="lesson">LESSON:&nbsp;&nbsp;&nbsp;
+Logical Operators
+</p>
+
+<pre class="lpre">
+Logical operators deal with criteria being
+specified on multiple columns.
+
+For example, I might be looking for an author
+whose last name is Hunter and first name is Cindy.
+
+The "AND" is a logical operator in this case.  It implies
+that all conditions must be true in order for a row to
+be returned to a Result Set.
+
+Example:
+
+	SELECT lastname, firstname, city, state
+	FROM author
+	WHERE lastname = 'Hunter' AND firstname = 'Cindy';
+
+
+<img src="http://profperry.com/Classes20/OracleSQL/Chapter_4/DB_diagram_part_2.jpg" alt="Database Diagram - Part 2">
+
+
+
+<hr>
+
+Another often used logical operator is the "OR".
+It implies that at least one of the conditions specified
+must be true in order for a row to be returned to a Result Set.
+
+I might want to see all the authors who live in either California
+or Utah.
+
+	SELECT lastname, firstname, city, state
+	FROM author
+	WHERE state = 'CA' OR state = 'UT';
+
+
+WARNING:  Some one may have asked for this information
+in the following way:  "Show me all the authors in California
+and Utah."
+
+Even though the person used the word "and" you really
+need to use a "OR" to get them all rows with both
+California and Utah listed.
+
+<hr>
+
+The last logical operator is:  NOT
+
+It negates any condition found directly after it.
+For example, if I wanted to see any author as long
+as the did not live in California or Utah, I could first
+find all the authors that did live in California or Utah
+and negate those results with a NOT operator
+
+Example:
+
+	SELECT lastname, firstname, city, state
+	FROM author
+	WHERE NOT (state = 'CA' OR state = 'UT');
+
+
+The ( )'s are important here!
+
+This first finds all rows for authors that live in either
+California or Utah, then it "switches" the results to
+be all the rows that did NOT meet that criteria of
+living in California or Utah.
+
+
+<hr>
+WARNING!
+
+Do not mix NOT's and OR's in the following manner...
+
+	SELECT lastname, firstname, city, state
+	FROM author
+	WHERE NOT state = 'CA' OR NOT state = 'UT';
+
+
+Equivalent Statement ( and still bad! ):
+
+	SELECT lastname, firstname, city, state
+	FROM author
+	WHERE  state != 'CA' OR  state != 'UT';
+
+
+
+</pre>
+
+
+</body>
+</html>
